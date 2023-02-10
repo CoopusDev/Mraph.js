@@ -4,8 +4,6 @@ export default class Action {
     onStop = () => {};
     isStarted = false;
     isStopped = false;
-    from = 0;
-    to = 1;
     
     /**
      * merge an action with another
@@ -33,15 +31,15 @@ export default class Action {
     run(start, stop, now) {
         if (this.isStarted && !this.isStopped) {
             if (now > stop) {
-                this.onUpdate(this.to);
+                this.onUpdate(1);
                 this.onStop();
                 this.isStopped = true;
             } else {
-                this.onUpdate((now - start)/(stop - start) * (this.to - this.from));
+                this.onUpdate((now - start)/(stop - start));
             }
         } else if (now > start) {
             this.onStart();
-            this.onUpdate(this.from);
+            this.onUpdate(0);
             this.isStarted = true;
         }
     }
