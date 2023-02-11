@@ -1,6 +1,8 @@
 // core
 import Layer from "./core/layer.js";
 
+export { Layer };
+
 // object
 import Point from "./object/point.js";
 import Segment from "./object/segment.js";
@@ -10,29 +12,19 @@ import Circle from "./object/circle.js";
 import NumberLine from "./object/number_line.js";
 import NumberPlane from "./object/number_plane.js";
 
+export { Point, Segment, Line, Arc, Circle, NumberLine, NumberPlane };
+
 // animation
 import animation from "./animation/animation.js";
+
+export { animation };
 
 // utils
 import * as utils from "./utils/utils.js";
 
+export { utils };
+
 // constant
-import * as Constant from "./constant/constant.js";
+import * as constant from "./constant/constant.js";
 
-export { Layer, Point, Segment, Line, Arc, Circle, NumberLine, NumberPlane, utils, Constant, animation };
-
-/*if (typeof window === "object" && typeof document === "object") {
-    window.Mraph = {};
-    utils.copy(window.Mraph, {
-        Layer,
-        Point,
-        Segment,
-        Line,
-        Arc,
-        Circle,
-        utils,
-        Constant,
-        NumberLine,
-        animation
-    });
-}*/
+export { constant };
