@@ -2,41 +2,31 @@ import Graph from "../core/graph.js";
 import Segment from "./segment.js";
 import { copy } from "../utils/utils.js";
 
-export default class NumberLine extends Graph {
-    showIntPoints = true;
-    intPointsLen = 10;
+export default class NumberLine extends Segment {
+    showTicks = true;
+    ticksLen = 10;
     
     constructor(p1, p2, unit, config) {
-        super();
-        this.axis = new Segment(p1, p2);
+        super(p1, p2, config);
         this.unit = unit;
         copy(this, config);
     }
     
     draw() {
-        const axis = this.axis;
-        axis.draw();
+        super.draw();
         
-        if (!this.showIntPoints) return;
-        const sin = Math.sin(axis.angle);
-        const cos = Math.cos(axis.angle);
+        if (!this.showTicks) return;
+        const sin = Math.sin(this.angle);
+        const cos = Math.cos(this.angle);
         
         Graph.draw(this, ctx => {
-            for (let num = 0; num < axis.length; num += this.unit) {
-                const x = axis.point1.x + cos * num;
-                const y = axis.point1.y + sin * num;
+            for (let num = 0; num < this.length; num += this.unit) {
+                const x = this.point1.x + cos * num;
+                const y = this.point1.y + sin * num;
                 
                 ctx.moveTo(x, y);
-                ctx.lineTo(x + sin * this.intPointsLen, y - cos * this.intPointsLen);
+                ctx.lineTo(x + sin * this.ticksLen, y - cos * this.ticksLen);
             }
         });
-    }
-    
-    set layer(value) {
-        this._layer = value;
-        this.axis.layer = value;
-    }
-    get layer() {
-        return this._layer;
     }
 }
